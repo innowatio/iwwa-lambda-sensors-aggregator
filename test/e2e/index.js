@@ -1,0 +1,123 @@
+import {expect} from "chai";
+import {merge} from "ramda";
+
+import {handler} from "index";
+import mongodb from "services/mongodb";
+import {run, getEventFromObject} from "../mocks";
+import {SENSORS_COLLECTION_NAME} from "config";
+
+const aSensor = {
+    description: "a description",
+    name: "Sensore ambientale",
+    type: "ZTHL",
+    virtual: false,
+    formula: "",
+    parentSite: "parentS",
+    parentAccount: "parentA"
+};
+
+describe("On sensor", () => {
+
+    var db;
+    var sensorsCollection;
+
+    before(async () => {
+        db = await mongodb;
+        sensorsCollection = db.collection(SENSORS_COLLECTION_NAME);
+    });
+
+    after(async () => {
+        await db.dropCollection(SENSORS_COLLECTION_NAME);
+        await db.close();
+    });
+
+    afterEach(async () => {
+        await sensorsCollection.remove({});
+    });
+
+    it("perform INSERT", async () => {
+        const eventSensor = merge(aSensor, {id: "ANZ01"});
+        const event = getEventFromObject({
+            id: "eventId",
+            data: {
+                element: eventSensor
+            },
+            type: "element inserted in collection sensors"
+        });
+        const expected = {
+            _id: "ANZ01",
+            description: "a description",
+            name: "Sensore ambientale",
+            type: "ZTHL",
+            virtual: false,
+            formula: "",
+            isDeleted: false,
+            parentSite: "parentS",
+            parentAccount: "parentA"
+        };
+
+        await run(handler, event);
+        const result = await sensorsCollection.findOne({_id: "ANZ01"});
+        expect(result).to.deep.equal(expected);
+    });
+
+    it("perform UPDATE", async () => {
+        sensorsCollection.insert(merge(aSensor, {_id: "ANZ01"}));
+
+        const eventSensor = merge(aSensor, {
+            id: "ANZ01",
+            parentSite: "siteId",
+            parentAccount: "AccountId",
+            description: "desc",
+            name: "Sensore co2",
+            type: "CO2",
+            virtual: false,
+            formula: "formula"
+        });
+        const event = getEventFromObject({
+            id: "eventId",
+            data: {
+                element: eventSensor
+            },
+            type: "element replaced in collection sensors"
+        });
+        const expected = {
+            _id: "ANZ01",
+            parentSite: "siteId",
+            parentAccount: "AccountId",
+            description: "desc",
+            name: "Sensore co2",
+            type: "CO2",
+            virtual: false,
+            formula: "formula",
+            isDeleted: false
+        };
+
+        await run(handler, event);
+        const result = await sensorsCollection.findOne({_id: "ANZ01"});
+        expect(result).to.deep.equal(expected);
+    });
+
+    it("perform logical DELETE", async () => {
+        sensorsCollection.insert(merge(aSensor, {_id: "ANZ01", isDeleted: false}));
+
+        const eventSensor = {
+            id: "ANZ01"
+        };
+        const event = getEventFromObject({
+            id: "eventId",
+            data: {
+                element: eventSensor
+            },
+            type: "element removed in collection sensors"
+        });
+        const expected = merge(aSensor, {
+            _id: "ANZ01",
+            isDeleted: true
+        });
+
+        await run(handler, event);
+        const result = await sensorsCollection.findOne({_id: "ANZ01"});
+        expect(result).to.deep.equal(expected);
+    });
+});
