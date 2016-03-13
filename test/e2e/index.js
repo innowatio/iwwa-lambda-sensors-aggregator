@@ -12,8 +12,8 @@ const aSensor = {
     type: "ZTHL",
     virtual: false,
     formula: "",
-    parentSite: "parentS",
-    parentAccount: "parentA"
+    siteId: "site1",
+    userId: "user1"
 };
 
 describe("On sensor", () => {
@@ -52,8 +52,8 @@ describe("On sensor", () => {
             virtual: false,
             formula: "",
             isDeleted: false,
-            parentSite: "parentS",
-            parentAccount: "parentA"
+            siteId: "site1",
+            userId: "user1"
         };
 
         await run(handler, event);
@@ -66,8 +66,8 @@ describe("On sensor", () => {
 
         const eventSensor = merge(aSensor, {
             id: "ANZ01",
-            parentSite: "siteId",
-            parentAccount: "AccountId",
+            siteId: "siteId",
+            userId: "userId",
             description: "desc",
             name: "Sensore co2",
             type: "CO2",
@@ -83,8 +83,8 @@ describe("On sensor", () => {
         });
         const expected = {
             _id: "ANZ01",
-            parentSite: "siteId",
-            parentAccount: "AccountId",
+            siteId: "siteId",
+            userId: "userId",
             description: "desc",
             name: "Sensore co2",
             type: "CO2",

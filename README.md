@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/innowatio/iwwa-lambda-sensors-aggregator.svg?branch=master)](https://travis-ci.org/innowatio/iwwa-lambda-sensors-aggregator)
+[![codecov.io](https://codecov.io/github/innowatio/iwwa-lambda-sensors-aggregator/coverage.svg?branch=master)](https://codecov.io/github/innowatio/iwwa-lambda-sensors-aggregator?branch=master)
+
 # iwwa-lambda-sensors-aggregator
 
 Lambda function for sensors aggregation
