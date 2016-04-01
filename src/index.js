@@ -1,13 +1,19 @@
 import router from "kinesis-router";
 import {partialRight} from "ramda";
+
 import {ACTION_INSERT, ACTION_UPDATE, ACTION_DELETE} from "config";
 import {logicalDelete, insert, update} from "services/mongodb";
+import addFormulaVariablesToSensor from "steps/add-formula-variables";
 
 async function pipeline (event, action) {
-    const sensor = event.data.element;
+    var sensor = event.data.element;
     sensor._id = sensor.id;
     delete sensor.id;
     sensor.isDeleted = action === ACTION_DELETE;
+
+    if (sensor.formula) {
+        sensor.variables = addFormulaVariablesToSensor(sensor.formula);
+    }
 
     switch (action) {
     case ACTION_INSERT:

@@ -90,6 +90,7 @@ describe("On sensor", () => {
             type: "CO2",
             virtual: false,
             formula: "formula",
+            variables: ["formula"],
             isDeleted: false
         };
 
