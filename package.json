@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "babel": "^6.5.2",
+    "babel-cli": "6.7.5",
     "babel-core": "^5.8.29",
     "babel-eslint": "^4.1.4",
     "chai": "^3.4.1",
@@ -35,6 +36,7 @@
     "sinon-chai": "^2.8.0"
   },
   "scripts": {
+    "build": "babel src -d bundle",
     "codecov": "codecov",
     "coverage": "NODE_ENV=test NODE_PATH=src babel-node $(npm bin)/isparta cover $(npm bin)/_mocha -- --recursive",
     "deploy": "gulp deploy",
