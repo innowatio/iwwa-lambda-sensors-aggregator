@@ -1,0 +1,13 @@
+#Download and install all dependencies
+npm install
+#Build src into bundle dir
+npm run build
+#Copy node_modules into bundle dir
+cp -r node_modules bundle/node_modules
+#Zip bundle files
+cd bundle
+zip -qr bundle.zip *
+mv bundle.zip ../
+#Clean directories
+cd ..
+rm -r bundle
