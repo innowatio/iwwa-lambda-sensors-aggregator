@@ -36,11 +36,11 @@ describe("On sensor", () => {
     });
 
     it("perform INSERT", async () => {
-        const eventSensor = merge(aSensor, {id: "ANZ01"});
         const event = getEventFromObject({
             id: "eventId",
             data: {
-                element: eventSensor
+                element: aSensor,
+                id: "ANZ01"
             },
             type: "element inserted in collection sensors"
         });
@@ -65,7 +65,6 @@ describe("On sensor", () => {
         sensorsCollection.insert(merge(aSensor, {_id: "ANZ01"}));
 
         const eventSensor = merge(aSensor, {
-            id: "ANZ01",
             siteId: "siteId",
             userId: "userId",
             description: "desc",
@@ -77,7 +76,8 @@ describe("On sensor", () => {
         const event = getEventFromObject({
             id: "eventId",
             data: {
-                element: eventSensor
+                element: eventSensor,
+                id: "ANZ01"
             },
             type: "element replaced in collection sensors"
         });
@@ -108,7 +108,8 @@ describe("On sensor", () => {
         const event = getEventFromObject({
             id: "eventId",
             data: {
-                element: eventSensor
+                element: eventSensor,
+                id: "ANZ01"
             },
             type: "element removed in collection sensors"
         });
