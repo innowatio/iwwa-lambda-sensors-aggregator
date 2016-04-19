@@ -102,13 +102,10 @@ describe("On sensor", () => {
     it("perform logical DELETE", async () => {
         sensorsCollection.insert(merge(aSensor, {_id: "ANZ01", isDeleted: false}));
 
-        const eventSensor = {
-            id: "ANZ01"
-        };
         const event = getEventFromObject({
             id: "eventId",
             data: {
-                element: eventSensor,
+                element: undefined,
                 id: "ANZ01"
             },
             type: "element removed in collection sensors"

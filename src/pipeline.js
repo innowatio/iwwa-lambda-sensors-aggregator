@@ -3,7 +3,7 @@ import addFormulaVariablesToSensor from "./steps/add-formula-variables";
 import {ACTION_INSERT, ACTION_UPDATE, ACTION_DELETE} from "./config";
 
 export default async function pipeline (event, action) {
-    var sensor = event.data.element;
+    var sensor = event.data.element || {};
     const id = event.data.id;
     sensor._id = id;
     sensor.isDeleted = action === ACTION_DELETE;
