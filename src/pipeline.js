@@ -5,7 +5,9 @@ import {ACTION_INSERT, ACTION_UPDATE, ACTION_DELETE} from "./config";
 export default async function pipeline (event, action) {
     var sensor = event.data.element || {};
     const id = event.data.id;
-    sensor._id = id;
+    if (!id) {
+        return null;
+    }
     sensor.isDeleted = action === ACTION_DELETE;
 
     if (sensor.formula) {
@@ -17,14 +19,14 @@ export default async function pipeline (event, action) {
     switch (action) {
     case ACTION_INSERT:
         sensor.createdDate = now;
-        await insert(sensor);
+        await insert(sensor, id);
         break;
     case ACTION_UPDATE:
         sensor.lastModifiedDate = now;
-        await update(sensor);
+        await update(sensor, id);
         break;
     case ACTION_DELETE:
-        await logicalDelete(sensor);
+        await logicalDelete(id);
         break;
     }
 
