@@ -18,7 +18,7 @@ export async function update (sensor) {
     const db = await MongoClient.connect(MONGODB_URL);
     return db.collection(SENSORS_COLLECTION_NAME).update(
         {_id: sensor._id},
-        sensor
+        {$set: sensor}
     );
 }
 

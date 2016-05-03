@@ -12,11 +12,15 @@ export default async function pipeline (event, action) {
         sensor.variables = addFormulaVariablesToSensor(sensor.formula);
     }
 
+    const now = Date.now();
+
     switch (action) {
     case ACTION_INSERT:
+        sensor.createdDate = now;
         await insert(sensor);
         break;
     case ACTION_UPDATE:
+        sensor.lastModifiedDate = now;
         await update(sensor);
         break;
     case ACTION_DELETE:
