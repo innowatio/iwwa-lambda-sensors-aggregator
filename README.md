@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/innowatio/iwwa-lambda-sensors-aggregator.svg?branch=master)](https://travis-ci.org/innowatio/iwwa-lambda-sensors-aggregator)
+[![Dependency Status](https://david-dm.org/innowatio/iwwa-lambda-sensors-aggregator.svg)](https://david-dm.org/innowatio/iwwa-lambda-sensors-aggregator)
+[![devDependency Status](https://david-dm.org/innowatio/iwwa-lambda-sensors-aggregator/dev-status.svg)](https://david-dm.org/innowatio/iwwa-lambda-sensors-aggregator#info=devDependencies)
 [![codecov.io](https://codecov.io/github/innowatio/iwwa-lambda-sensors-aggregator/coverage.svg?branch=master)](https://codecov.io/github/innowatio/iwwa-lambda-sensors-aggregator?branch=master)
 
 # iwwa-lambda-sensors-aggregator
