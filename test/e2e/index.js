@@ -12,7 +12,6 @@ const aSensor = {
     name: "Sensore ambientale",
     type: "ZTHL",
     virtual: false,
-    formula: "",
     siteId: "site1",
     userId: "user1"
 };
@@ -58,7 +57,6 @@ describe("On sensor", () => {
             name: "Sensore ambientale",
             type: "ZTHL",
             virtual: false,
-            formula: "",
             isDeleted: false,
             siteId: "site1",
             userId: "user1",
@@ -79,8 +77,7 @@ describe("On sensor", () => {
             description: "desc",
             name: "Sensore co2",
             type: "CO2",
-            virtual: false,
-            formula: "formula"
+            virtual: false
         });
         const event = getEventFromObject({
             id: "eventId",
@@ -98,8 +95,6 @@ describe("On sensor", () => {
             name: "Sensore co2",
             type: "CO2",
             virtual: false,
-            formula: "formula",
-            variables: ["formula"],
             isDeleted: false,
             lastModifiedDate: now
         };
@@ -177,7 +172,6 @@ describe("On sensor", () => {
             name: "Sensore ambientale",
             type: "ZTHL",
             virtual: false,
-            formula: "",
             isDeleted: false,
             siteId: "site1",
             userId: "user1",
@@ -190,7 +184,6 @@ describe("On sensor", () => {
             name: "Sensore ambientale 2",
             type: "ZTHL",
             virtual: false,
-            formula: "",
             isDeleted: false,
             siteId: "site1",
             userId: "user1",
@@ -204,7 +197,6 @@ describe("On sensor", () => {
             name: "Sensore ambientale 1",
             type: "ZTHL",
             virtual: false,
-            formula: "",
             isDeleted: false,
             siteId: "site1",
             userId: "user1",
@@ -218,7 +210,6 @@ describe("On sensor", () => {
             name: "Sensore ambientale 1",
             type: "ZTHL",
             virtual: false,
-            formula: "",
             isDeleted: true,
             siteId: "site1",
             userId: "user1",
