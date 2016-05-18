@@ -1,6 +1,6 @@
 {
   "name": "iwwa-lambda-sensors-aggregator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Lambda function for sensors aggregation",
   "main": "src/index.js",
   "repository": {
